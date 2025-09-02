@@ -1,0 +1,21 @@
+version: 0.2   # Versão do formato do buildspec
+
+phases:        # Fases do processo de build
+  install:     # Instala dependências, configura ambiente
+    runtime-versions:
+      python: 3.12
+  pre_build:   # Passos que rodam antes do build (opcional)
+    commands:
+      - echo "Rodando pre-build"
+  build:       # Onde ocorre a compilação/testes/empacotamento
+    commands:
+      - echo "Empacotando aplicação..."
+      - zip -r hello_world.zip .
+  post_build:  # Passos finais, ex: rodar testes de integração
+    commands:
+      - echo "Build finalizado!"
+
+artifacts:     # O que será enviado para o CodePipeline/S3
+  files:
+    - hello_world.zip
+    - template.yaml
